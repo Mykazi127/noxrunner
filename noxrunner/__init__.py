@@ -18,4 +18,3 @@ from noxrunner.client import NoxRunnerClient
 __version__ = "1.0.0"
 __author__ = "NoxRunner Team"
 __all__ = ["NoxRunnerClient", "NoxRunnerError", "NoxRunnerHTTPError"]
-

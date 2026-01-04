@@ -1,7 +1,10 @@
 # 🚀 NoxRunner - Python Client for Sandbox Execution Backends
 
+[![PyPI version](https://img.shields.io/pypi/v/noxrunner.svg)](https://pypi.org/project/noxrunner/)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Documentation](https://readthedocs.org/projects/noxrunner/badge/?version=latest)](https://noxrunner.readthedocs.io)
+[![CI](https://github.com/noxrunner/noxrunner/workflows/CI/badge.svg)](https://github.com/noxrunner/noxrunner/actions)
 
 **NoxRunner** is a Python client library for interacting with NoxRunner-compatible sandbox execution backends. It uses **only Python standard library** - **zero external dependencies**.
 
@@ -10,6 +13,7 @@
 - ✅ **Zero Dependencies**: Only uses Python standard library
 - ✅ **Complete API Coverage**: All NoxRunner backend endpoints
 - ✅ **Friendly CLI**: Colored output, interactive shell
+- ✅ **Local Testing Mode**: Offline testing with local sandbox backend
 - ✅ **Easy to Use**: Simple API with clear error messages
 - ✅ **Well Documented**: Comprehensive documentation and examples
 - ✅ **Type Hints**: Full type support for better IDE experience
@@ -72,6 +76,8 @@ client.delete_sandbox(session_id)
 
 ### As a CLI Tool
 
+**Remote Mode (Default)**:
+
 ```bash
 # Health check
 noxrunner health
@@ -85,9 +91,27 @@ noxrunner exec my-session python3 --version
 # Upload files
 noxrunner upload my-session script.py data.txt
 
+# Download files
+noxrunner download my-session --extract ./output
+
 # Interactive shell
 noxrunner shell my-session
+
+# Delete sandbox
+noxrunner delete my-session
 ```
+
+**Local Testing Mode** (for offline testing):
+
+```bash
+# Use --local-test flag for offline testing
+noxrunner --local-test create my-session
+noxrunner --local-test exec my-session echo "Hello"
+noxrunner --local-test upload my-session script.py
+noxrunner --local-test delete my-session
+```
+
+⚠️ **Warning**: Local testing mode executes commands in your local environment using `/tmp` directories. This can cause data loss or security risks!
 
 ## 📚 Documentation
 
@@ -123,8 +147,11 @@ NoxRunner is designed to work with any backend that implements the [NoxRunner Ba
 ## 🧪 Testing
 
 ```bash
-# Run all tests
+# Run unit tests (excludes integration tests)
 make test
+
+# Run integration tests (requires running NoxRunner backend)
+make test-integration
 
 # Run with coverage
 make test-cov
@@ -138,6 +165,13 @@ make format
 # Run all checks
 make check
 ```
+
+### Testing Modes
+
+- **Unit Tests**: Test local functionality using the local sandbox backend (no external dependencies)
+- **Integration Tests**: Test against a real remote NoxRunner backend (requires backend service)
+
+See the [documentation](https://noxrunner.readthedocs.io) for more details on testing.
 
 ## 📝 License
 

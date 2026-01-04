@@ -22,8 +22,9 @@ help:
 	@echo "  install       - Install the package (after setup-venv or standalone)"
 	@echo ""
 	@echo "Testing:"
-	@echo "  test          - Run all tests"
-	@echo "  test-cov      - Run tests with coverage report"
+	@echo "  test              - Run all unit tests (excludes integration tests)"
+	@echo "  test-cov          - Run tests with coverage report"
+	@echo "  test-integration - Run integration tests (requires running NoxRunner backend)"
 	@echo ""
 	@echo "Code Quality:"
 	@echo "  lint          - Run linting checks (flake8)"
@@ -88,10 +89,21 @@ dev-install:
 	@echo "✅ Package and dependencies installed! Ready for development."
 
 test:
-	$(PYTHON_CMD) -m pytest tests/ -v
+	@echo "Running unit tests (excluding integration tests)..."
+	$(PYTHON_CMD) -m pytest tests/ -v -m "not integration"
 
 test-cov:
-	$(PYTHON_CMD) -m pytest tests/ --cov=noxrunner --cov-report=html --cov-report=term
+	$(PYTHON_CMD) -m pytest tests/ -m "not integration" --cov=noxrunner --cov-report=html --cov-report=term
+
+test-integration:
+	@echo "Running integration tests (requires running NoxRunner backend)..."
+	@echo "Make sure NOXRUNNER_BASE_URL is set (default: http://127.0.0.1:8080)"
+	@echo ""
+	@if [ -z "$$NOXRUNNER_BASE_URL" ]; then \
+		echo "Using default base URL: http://127.0.0.1:8080"; \
+		echo "Set NOXRUNNER_BASE_URL to use a different backend"; \
+	fi
+	$(PYTHON_CMD) -m pytest tests/ -v -m integration
 
 lint:
 	$(PYTHON_CMD) -m flake8 noxrunner/ tests/ examples/ --max-line-length=100 --extend-ignore=E203,W503,E501

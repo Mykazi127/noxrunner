@@ -13,9 +13,9 @@ def main():
     # Initialize client
     base_url = "http://127.0.0.1:8080"
     print(f"Connecting to Sandbox Manager at {base_url}")
-    
+
     client = NoxRunnerClient(base_url)
-    
+
     # 1. Health check
     print("\n1. Health Check")
     if client.health_check():
@@ -23,7 +23,7 @@ def main():
     else:
         print("   ✗ Manager is not healthy")
         return 1
-    
+
     # 2. Create sandbox
     session_id = f"quickstart-{int(time.time())}"
     print(f"\n2. Creating Sandbox: {session_id}")
@@ -34,7 +34,7 @@ def main():
     except NoxRunnerError as e:
         print(f"   ✗ Failed: {e}")
         return 1
-    
+
     # 3. Wait for pod ready
     print("\n3. Waiting for Pod to be Ready")
     if client.wait_for_pod_ready(session_id, timeout=30):
@@ -42,7 +42,7 @@ def main():
     else:
         print("   ✗ Pod did not become ready")
         return 1
-    
+
     # 4. Execute a simple command
     print("\n4. Executing Command: python3 --version")
     try:
@@ -52,7 +52,7 @@ def main():
     except NoxRunnerError as e:
         print(f"   ✗ Failed: {e}")
         return 1
-    
+
     # 5. Upload a Python script
     print("\n5. Uploading Python Script")
     script = """#!/usr/bin/env python3
@@ -72,23 +72,23 @@ for item in os.listdir('.'):
     except NoxRunnerError as e:
         print(f"   ✗ Failed: {e}")
         return 1
-    
+
     # 6. Execute the uploaded script
     print("\n6. Executing Uploaded Script")
     try:
         result = client.exec(session_id, ["python3", "hello.py"])
         print("   Output:")
-        print(result.get('stdout', ''))
+        print(result.get("stdout", ""))
     except NoxRunnerError as e:
         print(f"   ✗ Failed: {e}")
         return 1
-    
+
     # 7. Upload multiple files
     print("\n7. Uploading Multiple Files")
     files = {
         "data.txt": "Line 1\nLine 2\nLine 3\n",
         "config.json": '{"name": "test", "value": 42}\n',
-        "README.md": "# Test Project\n\nThis is a test.\n"
+        "README.md": "# Test Project\n\nThis is a test.\n",
     }
     try:
         client.upload_files(session_id, files)
@@ -96,27 +96,27 @@ for item in os.listdir('.'):
     except NoxRunnerError as e:
         print(f"   ✗ Failed: {e}")
         return 1
-    
+
     # 8. List files
     print("\n8. Listing Files")
     try:
         result = client.exec(session_id, ["ls", "-la"])
         print("   Files:")
-        print(result.get('stdout', ''))
+        print(result.get("stdout", ""))
     except NoxRunnerError as e:
         print(f"   ✗ Failed: {e}")
         return 1
-    
+
     # 9. Read a file
     print("\n9. Reading File Content")
     try:
         result = client.exec(session_id, ["cat", "data.txt"])
         print("   Content:")
-        print(result.get('stdout', ''))
+        print(result.get("stdout", ""))
     except NoxRunnerError as e:
         print(f"   ✗ Failed: {e}")
         return 1
-    
+
     # 10. Extend TTL
     print("\n10. Extending TTL")
     try:
@@ -126,7 +126,7 @@ for item in os.listdir('.'):
             print("   ✗ Failed to extend TTL")
     except NoxRunnerError as e:
         print(f"   ✗ Failed: {e}")
-    
+
     # 11. Download files
     print("\n11. Downloading Files")
     try:
@@ -136,7 +136,7 @@ for item in os.listdir('.'):
     except NoxRunnerError as e:
         print(f"   ✗ Failed: {e}")
         return 1
-    
+
     # 12. Cleanup
     print("\n12. Cleaning Up")
     try:
@@ -147,14 +147,14 @@ for item in os.listdir('.'):
     except NoxRunnerError as e:
         print(f"   ✗ Failed: {e}")
         return 1
-    
-    print("\n" + "="*50)
+
+    print("\n" + "=" * 50)
     print("Quick Start Example Completed Successfully!")
-    print("="*50)
+    print("=" * 50)
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         exit(main())
     except KeyboardInterrupt:
@@ -163,6 +163,6 @@ if __name__ == '__main__':
     except Exception as e:
         print(f"\n\nUnexpected error: {e}")
         import traceback
+
         traceback.print_exc()
         exit(1)
-

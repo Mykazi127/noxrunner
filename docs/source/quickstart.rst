@@ -1,0 +1,114 @@
+Quick Start
+===========
+
+Installation
+------------
+
+Install NoxRunner from PyPI:
+
+.. code-block:: bash
+
+   pip install noxrunner
+
+Or install from source:
+
+.. code-block:: bash
+
+   git clone https://github.com/noxrunner/noxrunner.git
+   cd noxrunner
+   pip install -e .
+
+Basic Usage
+-----------
+
+As a Library
+~~~~~~~~~~~~
+
+.. code-block:: python
+
+   from noxrunner import NoxRunnerClient
+
+   # Create client
+   client = NoxRunnerClient("http://127.0.0.1:8080")
+
+   # Create sandbox
+   session_id = "my-session"
+   result = client.create_sandbox(session_id)
+   print(f"Sandbox: {result['podName']}")
+
+   # Wait for sandbox ready
+   client.wait_for_pod_ready(session_id)
+
+   # Execute command
+   result = client.exec(session_id, ["python3", "--version"])
+   print(result["stdout"])
+
+   # Upload files
+   client.upload_files(session_id, {
+       "script.py": "print('Hello from NoxRunner!')"
+   })
+
+   # Download files
+   tar_data = client.download_files(session_id)
+
+   # Delete sandbox
+   client.delete_sandbox(session_id)
+
+As a CLI Tool
+~~~~~~~~~~~~~
+
+Remote Mode (Default):
+
+.. code-block:: bash
+
+   # Health check
+   noxrunner health
+
+   # Create sandbox
+   noxrunner create my-session --wait
+
+   # Execute command
+   noxrunner exec my-session python3 --version
+
+   # Upload files
+   noxrunner upload my-session script.py data.txt
+
+   # Download files
+   noxrunner download my-session --extract ./output
+
+   # Interactive shell
+   noxrunner shell my-session
+
+   # Delete sandbox
+   noxrunner delete my-session
+
+Local Testing Mode
+~~~~~~~~~~~~~~~~~~
+
+For offline testing without a backend service:
+
+.. code-block:: bash
+
+   # Use --local-test flag
+   noxrunner --local-test create my-session
+   noxrunner --local-test exec my-session echo "Hello"
+   noxrunner --local-test upload my-session script.py
+   noxrunner --local-test delete my-session
+
+.. warning::
+
+   Local testing mode executes commands in your local environment using ``/tmp`` directories. 
+   This can cause data loss or security risks! Use only for testing purposes.
+
+Environment Variables
+---------------------
+
+- ``NOXRUNNER_BASE_URL``: Base URL of the NoxRunner backend (default: ``http://127.0.0.1:8080``)
+
+Next Steps
+----------
+
+- Read the :doc:`tutorial/index` for detailed examples
+- Check the :doc:`user_guide/index` for comprehensive usage guide
+- Explore the :doc:`api_reference/index` for complete API documentation
+

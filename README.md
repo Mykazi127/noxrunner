@@ -4,7 +4,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Documentation](https://readthedocs.org/projects/noxrunner/badge/?version=latest)](https://noxrunner.readthedocs.io)
-[![CI](https://github.com/noxrunner/noxrunner/workflows/CI/badge.svg)](https://github.com/noxrunner/noxrunner/actions)
+[![CI](https://github.com/lzjever/noxrunner/workflows/CI/badge.svg)](https://github.com/lzjever/noxrunner/actions)
 
 **NoxRunner** is a Python client library for interacting with NoxRunner-compatible sandbox execution backends. It uses **only Python standard library** - **zero external dependencies**.
 

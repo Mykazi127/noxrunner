@@ -1,5 +1,6 @@
 Changelog
 =========
 
-.. include:: ../../CHANGELOG.md
+.. literalinclude:: ../../CHANGELOG.md
+   :language: markdown
 

